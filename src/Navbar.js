@@ -19,7 +19,7 @@ function Navbar() {
     <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
             <Typography variant="h6" noWrap>
-                Earthquake Mapper
+                Earthquake mapper
             </Typography>
         </Toolbar>
     </AppBar>
