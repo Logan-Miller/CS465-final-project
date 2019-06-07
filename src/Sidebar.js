@@ -25,26 +25,34 @@ function Sidebar() {
 
     const classes = useStyles();
 
-  return (
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.toolbar} />
-        <List>
-            <ListItem>This</ListItem>
-            <ListItem>Is</ListItem>
-            <ListItem>Where</ListItem>
-            <ListItem>Our</ListItem>
-            <ListItem>Data</ListItem>
-            <ListItem>Will</ListItem>
-            <ListItem>Go</ListItem>
-        </List>
-      </Drawer>
-  );
+    function handleClick(e) {
+        e.preventDefault();
+        console.log('The link was clicked.');
+    }
+
+    return (
+        <Drawer
+            className={classes.drawer}
+            variant="permanent"
+            classes={{
+            paper: classes.drawerPaper,
+            }}
+        >
+            <div className={classes.toolbar} />
+            <div>
+                <button onClick={handleClick}>Its a button</button>
+            </div>
+            <List>
+                <ListItem>This</ListItem>
+                <ListItem>Is</ListItem>
+                <ListItem>Where</ListItem>
+                <ListItem>Our</ListItem>
+                <ListItem>Data</ListItem>
+                <ListItem>Will</ListItem>
+                <ListItem>Go</ListItem>
+            </List>
+        </Drawer>
+    );
 }
 
 export default Sidebar;
