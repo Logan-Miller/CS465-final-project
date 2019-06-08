@@ -1,12 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
-const drawerWidth = 350;
+const axios = require('axios');
+const drawerWidth = 250;
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
@@ -19,17 +20,36 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3),
   },
   toolbar: theme.mixins.toolbar,
-}));
+});
 
-function Sidebar() {
+class Sidebar extends React.Component {
 
-    const classes = useStyles();
+  constructor(props) {
+    super(props);
+    this.state = {
+      earthquakes: [],
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-    function handleClick(e) {
-        e.preventDefault();
-        console.log('The link was clicked.');
-    }
+  handleClick() {
+    const self = this;
 
+    axios.get("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/1.0_hour.geojson")
+      .then(function(response) {
+        console.log(response.data.features);
+        self.setState({
+          earthquakes: response.data.features
+        })
+      })
+      .catch(function(err) {
+        console.log(err.message);
+      });
+
+  }
+
+  render() {
+    const { classes } = this.props;
     return (
         <Drawer
             className={classes.drawer}
@@ -40,19 +60,19 @@ function Sidebar() {
         >
             <div className={classes.toolbar} />
             <div>
-                <button onClick={handleClick}>Its a button</button>
+                <button onClick={this.handleClick}>Its a button</button>
             </div>
             <List>
-                <ListItem>This</ListItem>
-                <ListItem>Is</ListItem>
-                <ListItem>Where</ListItem>
-                <ListItem>Our</ListItem>
-                <ListItem>Data</ListItem>
-                <ListItem>Will</ListItem>
-                <ListItem>Go</ListItem>
+               {
+                 this.state.earthquakes.map((earthquake, index) => (
+                   <ListItem key = {index}> {earthquake.properties.place}</ListItem>
+                 ))
+               }
+
             </List>
         </Drawer>
     );
+  }
 }
 
-export default Sidebar;
+export default (withStyles(styles)(Sidebar));
