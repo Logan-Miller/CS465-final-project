@@ -3,6 +3,13 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 
 const axios = require('axios');
 const drawerWidth = 250;
@@ -49,6 +56,7 @@ class Sidebar extends React.Component {
   }
 
   render() {
+
     const { classes } = this.props;
     return (
         <Drawer
@@ -65,7 +73,12 @@ class Sidebar extends React.Component {
             <List>
                {
                  this.state.earthquakes.map((earthquake, index) => (
-                   <ListItem key = {index}> {earthquake.properties.place}</ListItem>
+                  <ListItem key = {index}> 
+                    <ListItemText
+                      primary= {"Magnitude: " + earthquake.properties.mag}
+                      secondary={"Location: " + earthquake.properties.title}
+                    />
+                  </ListItem>
                  ))
                }
 
