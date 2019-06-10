@@ -39,7 +39,6 @@ class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      earthquakes: [],
       selectedMagnitude: "1.0",
       selectedTimeframe: "hour"
     };
@@ -49,17 +48,16 @@ class Sidebar extends React.Component {
 
   handleClick() {
     const self = this;
-
+    console.log(this.props);
     axios.get("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/" 
     + this.state.selectedMagnitude + "_" + this.state.selectedTimeframe + ".geojson")
       .then(function(response) {
-        self.setState({
-          earthquakes: response.data.features,
-        })
+        self.props.onEarthquakesChange(response.data.features);
       })
       .catch(function(err) {
         console.log(err.message);
       });
+
   }
 
   handleChange(event) {
@@ -79,6 +77,7 @@ class Sidebar extends React.Component {
   render() {
 
     const { classes } = this.props;
+    const earthquakes = this.props.earthquakes;
     return (
       <Drawer
           className={classes.drawer}
@@ -123,7 +122,7 @@ class Sidebar extends React.Component {
         </div>
         <List>
             {
-              this.state.earthquakes.map((earthquake, index) => (
+              earthquakes.map((earthquake, index) => (
               <ListItem key = {index}> 
                 <ListItemText
                   primary= {"Magnitude: " + earthquake.properties.mag}
