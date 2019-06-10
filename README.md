@@ -12,12 +12,18 @@ Node.JS
 A modern browser
 ```
 
+### Required Credentials
+
+You must obtain your own API key in order to use the google maps API
+
 ### Installing
 ```
 Clone the repository
 Navigate to the directory
 Run 'npm install'
-Run 'npm run start'
+If running on windows cmd.exe Run 'set "REACT_APP_NOT_SECRET_CODE=YOUR API KEY" && npm start'
+If running on windows powershell Run '($env:REACT_APP_NOT_SECRET_CODE = "YOUR API KEY") -and (npm start)'
+If running on Linux, MacOS (BASH) Run 'REACT_APP_NOT_SECRET_CODE=YOUR API KEY npm start'
 A browser window should pop up, otherwise navigate to localhost:7000 to view the page
 ```
 
