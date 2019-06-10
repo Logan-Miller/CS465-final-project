@@ -15,10 +15,10 @@ class MapContainer extends React.Component {
   }
 
   displayMarkers = () => {
-    return this.state.markers.map((marker, index) => {
+    return this.props.earthquakes.map((earthquake, index) => {
       return <Marker key={index} id={index} position={{
-       lat: marker.lat,
-       lng: marker.lng
+       lat: earthquake.geometry.coordinates[1],
+       lng: earthquake.geometry.coordinates[0]
      }}
      onClick={() => console.log("You clicked me!")} />
     })
