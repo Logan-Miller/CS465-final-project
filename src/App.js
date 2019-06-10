@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Navbar from './Navbar.js';
 import Sidebar from './Sidebar.js';
-import Map from './map.js';
+import MapContainer from './MapContainer.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,10 +23,7 @@ function App() {
       <Sidebar></Sidebar>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Map></Map>
-        {/* <Typography paragraph>
-          This is where the map will go
-        </Typography> */}
+        <MapContainer></MapContainer>
       </main>
     </div>
   );
