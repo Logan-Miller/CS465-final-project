@@ -7,34 +7,32 @@ import { green } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     border: green,
   },
-});
+}));
 
-class Navbar extends React.Component {
+function Navbar() {
+  const classes = useStyles();
 
-  handleClick() {
-    console.log('Hi');
+  function handleClick(e) {
+    e.preventDefault();
+    console.log('The link was clicked.');
   }
 
-  render() {
-    const { classes } = this.props;
+  return (
+    <AppBar position="fixed" className={classes.appBar}>
+      <Toolbar>
+        <Typography variant="h6" noWrap>
+          Earthquake mapper
+            </Typography>
+        <Button color="inherit" onClick={handleClick}>About</Button>
 
-    return (
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" noWrap>
-            Earthquake mapper
-              </Typography>
-          <Button color="inherit" onClick={this.handleClick}>About</Button>
-        </Toolbar>
-      </AppBar>
-    );
-  }
-
+      </Toolbar>
+    </AppBar>
+  );
 }
-export default (makeStyles(styles)(Navbar));
-//export default Navbar;
+
+export default Navbar;
